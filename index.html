@@ -151,6 +151,11 @@
             <p>&copy; <span id="current-year"></span> Aayush Baral. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+  if ('service worker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
 </body>
 </html>
 
