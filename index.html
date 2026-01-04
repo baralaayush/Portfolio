@@ -6,6 +6,7 @@
     <title>Portfolio</title>
     <link rel="Shortcut icon" href="logo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
 </head>
@@ -153,7 +154,7 @@
     </footer>
     <script>
   if ('service worker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register('sw.js');
   }
 </script>
 </body>
