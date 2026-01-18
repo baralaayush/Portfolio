@@ -5,38 +5,43 @@
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-        const form = document.getElementById('contact-form');
-        const submitMessage = document.getElementById('submit-message');
+    const contactForm = document.getElementById('contact-form');
+    const toast = document.getElementById('submit-message');
+    const btn = document.getElementById('submit-btn');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop the default form submission (page reload)
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // STOP THE RELOAD
+        
+        // 1. Visual Feedback
+        btn.disabled = true;
+        btn.innerText = "Sending...";
+        toast.style.display = 'block';
+        toast.className = ''; 
+        toast.innerText = "Sending your message...";
 
-            const formData = new FormData(form);
-            const action = form.getAttribute('action');
-            
-            // Send the data using Fetch API
-            fetch(action, {
-                method: 'POST', // Must be POST
-                body: formData, // The data to send
-                mode: 'no-cors' // Required for cross-origin submission to Apps Script
-            })
-            .then(response => {
-                // Since the script returns a 'Success' message, 
-                // we assume success if the request is completed.
-                // Reset the form and show a success message
-                form.reset(); 
-                submitMessage.style.display = 'block'; 
-                
-                // Hide the message after a few seconds
-                setTimeout(() => {
-                    submitMessage.style.display = 'none';
-                }, 5000); 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred during submission. Please try again.');
-            });
+        // 2. Send data in the background
+        fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        })
+        .then(response => {
+        // 3. Success State
+        toast.classList.add('success');
+        toast.innerText = "✓ Sent! Check your inbox shortly.";
+        contactForm.reset();
+        })
+        .catch(error => {
+        // 4. Error State
+        toast.classList.add('error');
+        toast.innerText = "Oops! Please try again............";
+        })
+        .finally(() => {
+        // 5. Reset button and hide toast after 5 seconds
+        btn.disabled = false;
+        btn.innerText = "Send Message";
+        setTimeout(() => { toast.style.display = 'none'; }, 5000);
         });
+    });
 
 
 

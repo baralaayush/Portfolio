@@ -228,11 +228,29 @@ section h2 {
     background: #c0392b;
 }
 
-#submit-message { 
-            margin-top: 15px; 
-            font-weight: bold; 
-            color: rgba(255, 0, 0, 0.644); 
-            display: none;
+#submit-message {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  min-width: 280px;
+  padding: 16px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+#submit-message.success { background-color: #2e7d32; } /* Green */
+#submit-message.error { background-color: #d32f2f; }   /* Red */
+
+/* Simple button feedback */
+#submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .social-links {
